@@ -4,36 +4,57 @@ import tkinter as tk
 
 class ColorGame:
     def __init__(self):
-        # Create widgets
+      	
         self.root = tk.Tk()
         self.score = 0
-        self.timer = 10
+        self.timer = 0
+        self.start_timer = 0
         self.color = ''
+
         self.label_condition = tk.Label(self.root, text='Type in the colour of the word,'
                                                         ' and not of the word text.',
-                                        font=10)
-        self.label_enter = tk.Label(text='Press the "Start" to start the game.')
+										font=10)
+
+        self.label_input_timer = tk.Label(self.root, text='Input timer, only digit')
+
+        self.entry_timer = tk.Entry(self.root)
+
+        self.button_set = tk.Button(self.root, text='Set value', command=self.set_value)
+
+        self.label_enter = tk.Label(text='Press the "Enter" to start the game.')
 
         self.label_score = tk.Label(text='Score: ' + str(self.score))
-
-        self.label_time = tk.Label(self.root, text='Time left: ' + str(self.timer))
-
+      
         self.message = tk.Label()
 
         self.text_entry = tk.Entry(self.root)
 
         self.show_widgets()
 
+    def set_value(self):
+    	try:
+    		if self.timer:
+	    		pass
+	    	else:	
+		    	self.timer = int(self.entry_timer.get())
+		    	self.start_timer = int(self.entry_timer.get())
+		    	self.label_time = tk.Label(self.root, text='Time left: ' + str(self.timer))
+		    	self.label_time.pack()
+    	except ValueError:
+    		pass
+		  	
     def show_widgets(self):
         self.label_condition.pack()
+    	self.label_input_timer.pack()
+        self.entry_timer.pack()
+        self.button_set.pack()
         self.label_enter.pack()
         self.label_score.pack()
-        self.label_time.pack()
         self.message.pack()
         self.text_entry.pack()
         self.root.bind('<Return>', self.enter_click)
         self.text_entry.focus_set()
-
+       
     def random_color(self):
         colors = ['red',
                   'green',
@@ -44,10 +65,10 @@ class ColorGame:
                   'pink']
         random_color = random.choice(colors)
         if self.timer != 0:
-            self.message.config(fg=random_color,
+        	self.message.config(fg=random_color,
                                 text=random.choice(colors),
                                 font=15)
-            self.color = random_color
+        	self.color = random_color
         else:
             pass
 
@@ -68,7 +89,7 @@ class ColorGame:
             self.message.config(text="Game over")
 
     def enter_click(self, event):
-        if self.timer == 10:
+        if self.timer == self.start_timer:
             self.clock()
         self.next_color()
 
