@@ -13,7 +13,7 @@ class ColorGame:
 
         self.label_condition = tk.Label(self.root, text='Type in the colour of the word,'
                                                         ' and not of the word text.',
-										font=10)
+					font=10)
 
         self.label_input_timer = tk.Label(self.root, text='Input timer, only digit')
 
@@ -33,13 +33,13 @@ class ColorGame:
 
     def set_value(self):
     	try:
-    		if self.timer:
-	    		pass
-	    	else:	
-		    	self.timer = int(self.entry_timer.get())
-		    	self.start_timer = int(self.entry_timer.get())
-		    	self.label_time = tk.Label(self.root, text='Time left: ' + str(self.timer))
-		    	self.label_time.pack()
+    	    if self.timer:
+	    	pass
+	    else:	
+		self.timer = int(self.entry_timer.get())
+		self.start_timer = int(self.entry_timer.get())
+		self.label_time = tk.Label(self.root, text='Time left: ' + str(self.timer))
+		self.label_time.pack()
     	except ValueError:
     		pass
 		  	
